@@ -3,8 +3,15 @@ services:
     image: ${DOCKER_HUB_USERNAME}/shortlink-fe:latest
     container_name: shortlink-app-fe
     restart: on-failure
-    ports:
-      - 3000:3000
+    networks:
+      - nginx-network
+    # ports:
+    #   - 3000:3000
 
 volumes:
   db_data:
+
+networks:
+  nginx-network:
+    name: nginx-network
+    external: true
