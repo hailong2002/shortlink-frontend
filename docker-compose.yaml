@@ -1,0 +1,10 @@
+services:
+  app:
+    image: ${DOCKER_HUB_USERNAME}/shortlink-fe:latest
+    container_name: shortlink-app-fe
+    restart: on-failure
+    ports:
+      - 80:5173
+
+volumes:
+  db_data:
