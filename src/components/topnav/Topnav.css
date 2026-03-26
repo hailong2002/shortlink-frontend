@@ -1,0 +1,26 @@
+.topnav {
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    float: left;
+    img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.login-btn {
+    float: right;
+    padding: 15px;
+    font-family: var(--mono);
+    &:hover {
+        color: var(--accent);
+        cursor: pointer;
+    }
+}
+
+.username {
+    float: right;
+    padding: 15px;
+}
