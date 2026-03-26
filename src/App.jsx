@@ -19,6 +19,7 @@ function App() {
       setLoading(false);
     } catch (error) {
       console.error("Lỗi rồi:", error);
+      setLoading(false);
       alert("Hỏng rồi, check lại Server hoặc CORS đi!");
     }
   };
@@ -34,24 +35,34 @@ function App() {
       {isOpen && (
         <LoginModal onClose={() => setIsOpen(false)} />
       )}
-      <div className="shortlink-box">
-        {/* <div className="ticks"></div> */}
-        <input
-          type="text"
-          placeholder="Enter your URL..."
-          style={{ fontFamily: "var(--mono)" }}
-          onChange={setInputUrl}
-        />
-        {!loading && <button
-          className="counter"
-          onClick={handleShorten}
-        >Shorten</button>
-        }
+      <div className='shortlink-container'>
+        <div className='top-row'>
+          <p className='title'>Make your link shorter</p>
+          <div className="shortlink-box">
+            {/* <div className="ticks"></div> */}
+            <input
+              type="text"
+              placeholder="Enter your URL..."
+              onChange={setInputUrl}
+            />
+            {!loading && <button
+              className="counter"
+              onClick={handleShorten}
+            >Shorten</button>
+            }
+          </div>
+          {loading && <div className="spinner"></div>}
+          {result && (
+            <p className='result'>Short link: <a href={result.data} target="_blank" rel="noopener noreferrer">{result.data}</a></p>
+          )}
 
-        {loading && <div className="spinner"></div>}
-        {result && (
-          <p>Short link: <a href={result.data} target="_blank" rel="noopener noreferrer">{result.data}</a></p>
-        )}
+
+        </div>
+
+
+        <div className='history'>
+
+        </div>
       </div>
       <Footer />
 

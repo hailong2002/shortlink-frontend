@@ -1,6 +1,6 @@
 import './Topnav.css';
 import { useState, useEffect } from 'react';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/main_logo.png';
 
 function TopNav({ onLoginClick }) {
 
