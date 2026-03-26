@@ -5,6 +5,8 @@ services:
     restart: on-failure
     networks:
       - nginx-network
+    volumes:
+      - ./nginx-fe.conf:/etc/nginx/conf.d/default.conf
     # ports:
     #   - 3000:3000
 
