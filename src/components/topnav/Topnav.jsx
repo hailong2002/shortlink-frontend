@@ -7,7 +7,7 @@ function TopNav({ onLoginClick }) {
     const [username, setUsername] = useState(null);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('access_token');
         if (token) {
             const payload = JSON.parse(atob(token.split('.')[1]));
             setUsername(payload.sub);

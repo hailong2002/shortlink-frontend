@@ -1,17 +1,33 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import { getOriginalUrl, createShortLink } from './services/shortlink';
+import { getOriginalUrl, createShortLink, me } from './services/shortlink';
 import TopNav from './components/topnav/Topnav';
 import Footer from './components/footer/Footer';
 import LoginModal from './components/login_modal/Login_Modal';
+import axiosClient from './infrastructure/axiosClient';
 
 function App() {
   const [url, setUrl] = useState(''); // Lưu link gốc người dùng gõ
   const [result, setResult] = useState(''); // Lưu link rút gọn trả về
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    me()
+      .then(res => {
+        setUser(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [])
 
   const handleShorten = async () => {
+    if (!user) {
+      setIsOpen(true);
+      return;
+    }
     try {
       setLoading(true);
       const response = await createShortLink({ originalUrl: url });

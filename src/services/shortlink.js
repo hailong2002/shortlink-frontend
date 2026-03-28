@@ -1,8 +1,7 @@
-import axios from 'axios';
+import axiosClient from '../infrastructure/axiosClient';
 
-const API = axios.create({
-    baseURL: 'https://shortlink.io.vn'
-});
+const API = axiosClient;
 
 export const getOriginalUrl = (code) => API.get(`/${code}`);
 export const createShortLink = (data) => API.post('/api/shortlink/shorten', data);
+export const me = () => API.get('/api/user/me');
