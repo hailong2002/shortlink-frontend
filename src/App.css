@@ -16,7 +16,8 @@
 }
 
 .title{
-  color: white
+  color: white;
+  font-family: var(--mono);
 }
 .shortlink-box {
       display: flex;
@@ -149,7 +150,9 @@ input[type="text"] {
   }
 }
 
-
+.shortedUrl {
+  color: white;
+}
 
 
 

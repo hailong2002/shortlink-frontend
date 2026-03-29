@@ -69,7 +69,7 @@ function App() {
           </div>
           {loading && <div className="spinner"></div>}
           {result && (
-            <p className='result'>Short link: <a href={result.data} target="_blank" rel="noopener noreferrer">{result.data}</a></p>
+            <p className='result'>Short link: <a className='shortedUrl' href={result.data} target="_blank" rel="noopener noreferrer">{result.data}</a></p>
           )}
 
 

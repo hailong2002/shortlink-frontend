@@ -3,7 +3,7 @@ import './Login_modal.css';
 function LoginModal({ onClose }) {
 
     const handleLogin = () => {
-        window.location.href = "https://api.shortlink.io.vn/oauth2/authorization/google";
+        window.location.href = "https://shortlink.io.vn/oauth2/authorization/google";
     };
 
     return (
