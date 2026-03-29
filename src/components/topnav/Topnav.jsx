@@ -10,7 +10,7 @@ function TopNav({ onLoginClick, user }) {
                 <img src={logo} alt="Logo" />
             </div>
             {
-                user.email ? (<div className="username">{user.email}</div>) : 
+                user ? (<div className="username">{user.email}</div>) : 
                 <div className="login-btn">
                     <a onClick={onLoginClick}>Login</a>
                 </div>
