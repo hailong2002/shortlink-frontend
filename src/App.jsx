@@ -47,7 +47,7 @@ function App() {
 
   return (
     <>
-      <TopNav onLoginClick={() => setIsOpen(true)} />
+      <TopNav onLoginClick={() => setIsOpen(true)} user={user}/>
       {isOpen && (
         <LoginModal onClose={() => setIsOpen(false)} />
       )}

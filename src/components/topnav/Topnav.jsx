@@ -2,18 +2,7 @@ import './Topnav.css';
 import { useState, useEffect } from 'react';
 import logo from '../../assets/main_logo.png';
 
-function TopNav({ onLoginClick }) {
-
-    const [username, setUsername] = useState(null);
-
-    useEffect(() => {
-        const token = localStorage.getItem('access_token');
-        if (token) {
-            const payload = JSON.parse(atob(token.split('.')[1]));
-            setUsername(payload.sub);
-        }
-    }, []);
-
+function TopNav({ onLoginClick, user }) {
 
     return (
         <div className="topnav">
@@ -21,7 +10,7 @@ function TopNav({ onLoginClick }) {
                 <img src={logo} alt="Logo" />
             </div>
             {
-                username ? (<div className="username">{username}</div>) : 
+                user.email ? (<div className="username">{user.email}</div>) : 
                 <div className="login-btn">
                     <a onClick={onLoginClick}>Login</a>
                 </div>
