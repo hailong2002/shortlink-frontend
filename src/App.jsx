@@ -3,8 +3,8 @@ import './App.css'
 import { getOriginalUrl, createShortLink, me } from './services/shortlink';
 import TopNav from './components/topnav/Topnav';
 import Footer from './components/footer/Footer';
-import LoginModal from './components/login_modal/Login_Modal';
-import axiosClient from './infrastructure/axiosClient';
+import LoginModal from './components/login-modal/LoginModal';
+import HistoryTable from './components/history-table/HistoryTable';
 
 function App() {
   const [url, setUrl] = useState(''); // Lưu link gốc người dùng gõ
@@ -75,11 +75,12 @@ function App() {
 
         </div>
 
-
-        <div className='history'>
-
+       <div className='history'>
+          <HistoryTable />
         </div>
+       
       </div>
+
       <Footer />
 
     </>

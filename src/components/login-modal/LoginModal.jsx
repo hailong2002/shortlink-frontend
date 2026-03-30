@@ -1,4 +1,4 @@
-import './Login_modal.css';
+import './LoginModal.css';
 
 function LoginModal({ onClose }) {
 

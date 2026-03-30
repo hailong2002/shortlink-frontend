@@ -1,0 +1,30 @@
+.history-container {
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.history-title {
+    font-family: var(--mono);
+
+}
+
+.history-table {
+    font-family: var(--mono);
+}
+
+thead>tr>th {
+    border: 1px solid var(--border);
+}
+
+tbody>tr>td {
+    border: 1px solid var(--border);
+    text-align: left;
+}
+
+.pagination {
+    display: flex;
+    align-items: right;
+    justify-content: right;
+}

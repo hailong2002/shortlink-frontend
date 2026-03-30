@@ -1,6 +1,7 @@
 .shortlink-container {
-  /* display: flex; */
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
   .top-row {
     display: flex;
@@ -108,9 +109,10 @@ input[type="text"] {
 
 .history {
   display: flex;
+  flex: 1;
   background-color: var(--accent-bg);
-  height: 100%;
-  flex: 1
+  justify-content: center;
+  /* align-items: center; */
 }
 
 .hero {
@@ -171,3 +173,4 @@ input[type="text"] {
     transform: rotate(360deg);
   }
 }
+
