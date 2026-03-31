@@ -7,7 +7,7 @@ import "./HistoryTable.css";
 function HistoryTable() {
     const [historyData, setHistoryData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [sorting, setSorting] = useState([{ id: 'createdDate', desc: true }]);
+    const [sorting, setSorting] = useState([{ id: 'createdAt', desc: true }]);
     const [totalPages, setTotalPages] = useState(0);
     const [pagination, setPagination] = useState({
         pageIndex: 0,
@@ -15,7 +15,7 @@ function HistoryTable() {
     });
     useEffect(() => {
         setLoading(true);
-        let sortString = "createdDate,desc";
+        let sortString = "createdAt,desc";
 
         if (sorting.length > 0) {
             const { id, desc } = sorting[0];
@@ -49,8 +49,8 @@ function HistoryTable() {
                 accessorKey: "shortenedUrl",
             },
             {
-                header: "Created Date",
-                accessorKey: "createdDate",
+                header: "Created At",
+                accessorKey: "createdAt",
             },
             {
                 header: "Clicked count",
