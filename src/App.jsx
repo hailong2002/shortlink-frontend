@@ -75,9 +75,9 @@ function App() {
 
         </div>
 
-       <div className='history'>
-          <HistoryTable />
-        </div>
+       
+        {user && <div className='history'><HistoryTable /></div>  }
+      
        
       </div>
 
