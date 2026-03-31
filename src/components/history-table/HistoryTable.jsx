@@ -6,14 +6,16 @@ import "./HistoryTable.css";
 
 function HistoryTable() {
     const [historyData, setHistoryData] = useState([]);
-    const [sorting, setSorting] = useState([{ id: 'createdAt', desc: true }]);
+    const [loading, setLoading] = useState(true);
+    const [sorting, setSorting] = useState([{ id: 'createdDate', desc: true }]);
     const [totalPages, setTotalPages] = useState(0);
     const [pagination, setPagination] = useState({
         pageIndex: 0,
         pageSize: 10,
     });
     useEffect(() => {
-        let sortString = "createdAt,desc";
+        setLoading(true);
+        let sortString = "createdDate,desc";
 
         if (sorting.length > 0) {
             const { id, desc } = sorting[0];
@@ -21,20 +23,22 @@ function HistoryTable() {
         }
         getHistory(pagination.pageIndex, pagination.pageSize, sortString).then(
             res => {
-                setHistoryData(res.content);
-                setTotalPages(res.totalPages)
+                setHistoryData(res.data.content);
+                setTotalPages(res.data.totalPages)
             }
         ).catch(err => {
             console.log(err);
+        }).finally(() => {
+            setLoading(false);
         })
 
-    }, [pagination.pageIndex, pagination.pageSize])
+    }, [pagination.pageIndex, pagination.pageSize, sorting])
     const [globalFilter, setGlobalFilter] = useState("");
     const columns = useMemo(
         () => [
             {
                 header: "No",
-                accessorKey: "no",
+                cell: (info) => info.row.index + (pagination.pageIndex * pagination.pageSize) + 1,
             },
             {
                 header: "Original URL",
@@ -42,15 +46,15 @@ function HistoryTable() {
             },
             {
                 header: "Short URL",
-                accessorKey: "shortUrl",
+                accessorKey: "shortenedUrl",
             },
             {
-                header: "Created At",
-                accessorKey: "createdAt",
+                header: "Created Date",
+                accessorKey: "createdDate",
             },
             {
                 header: "Clicked count",
-                accessorKey: "clickedCount",
+                accessorKey: "clickCount",
             },
         ],
         []
@@ -76,14 +80,8 @@ function HistoryTable() {
         onPaginationChange: setPagination, // Khi bấm nút, nó sẽ update cái state này
         manualPagination: true,            // QUAN TRỌNG: Bật chế độ Server-side
         getCoreRowModel: getCoreRowModel(),
-        // initialState: {
-        //     pagination: {
-        //         pageSize: 10,
-        //     },
-        // },
         onSortingChange: setSorting,
         onGlobalFilterChange: setGlobalFilter,
-        getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
@@ -116,7 +114,9 @@ function HistoryTable() {
         <>
             <div className="history-container">
                 <div>
-                    {historyData ?
+                    {loading ? (
+                        <div className="history-loading">Loading...</div>
+                    ) : historyData.length > 0 ? (
                         (
                             <>
                                 <div className="history-content">
@@ -218,13 +218,9 @@ function HistoryTable() {
                             </>
                         )
 
-                        : (
-                            <>
-                                <p>No history</p>
-                            </>
+                        ) : (
+                            <p className="no-history">No history</p>
                         )
-
-
                     }
                 </div>
             </div>

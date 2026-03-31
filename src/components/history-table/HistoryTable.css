@@ -180,3 +180,37 @@ input {
     /* padding: 0 10px; */
     /* box-sizing: border-box; */
 }
+
+.history-loading, 
+.no-history {
+    text-align: center;
+    padding: 40px;
+    font-family: var(--mono);
+    color: #64748b;
+    font-size: 18px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin: 20px 100px;
+}
+
+.history-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.history-loading::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e2e8f0;
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
