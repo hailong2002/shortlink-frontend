@@ -12,6 +12,8 @@ function HistoryTable() {
         pageSize: 10,
     });
     useEffect(() => {
+        let sortString = "createdAt,desc";
+
         if (sorting.length > 0) {
             const { id, desc } = sorting[0];
             sortString = `${id},${desc ? 'desc' : 'asc'}`;
