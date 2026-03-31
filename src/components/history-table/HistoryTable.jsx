@@ -6,14 +6,12 @@ import "./HistoryTable.css";
 
 function HistoryTable() {
     const [historyData, setHistoryData] = useState([]);
-    const [sorting, setSorting] = useState([{ id: 'createdDate', desc: true }]);
+    const [sorting, setSorting] = useState([{ id: 'createdAt', desc: true }]);
     const [pagination, setPagination] = useState({
         pageIndex: 0,
         pageSize: 10,
     });
     useEffect(() => {
-        let sortString = "createdDate,desc"; // Giá trị mặc định nếu chưa có sort
-
         if (sorting.length > 0) {
             const { id, desc } = sorting[0];
             sortString = `${id},${desc ? 'desc' : 'asc'}`;
