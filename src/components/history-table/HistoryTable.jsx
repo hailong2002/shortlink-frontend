@@ -7,6 +7,7 @@ import "./HistoryTable.css";
 function HistoryTable() {
     const [historyData, setHistoryData] = useState([]);
     const [sorting, setSorting] = useState([{ id: 'createdAt', desc: true }]);
+    const [totalPages, setTotalPages] = useState(0);
     const [pagination, setPagination] = useState({
         pageIndex: 0,
         pageSize: 10,
@@ -21,6 +22,7 @@ function HistoryTable() {
         getHistory(pagination.pageIndex, pagination.pageSize, sortString).then(
             res => {
                 setHistoryData(res.content);
+                setTotalPages(res.totalPages)
             }
         ).catch(err => {
             console.log(err);
@@ -65,7 +67,7 @@ function HistoryTable() {
     const table = useReactTable({
         data: historyData,
         columns,
-        pageCount: historyData.totalPages,
+        pageCount: totalPages,
         state: {
             globalFilter,
             sorting,
