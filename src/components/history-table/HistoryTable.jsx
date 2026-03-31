@@ -1,14 +1,32 @@
 import { useState, useEffect } from "react";
 import { useReactTable, getCoreRowModel, getSortedRowModel, getFilteredRowModel, getPaginationRowModel, flexRender } from "@tanstack/react-table";
 import { useMemo } from "react";
+import { getHistory } from "../../services/shortlink";
 import "./HistoryTable.css";
 
 function HistoryTable() {
     const [historyData, setHistoryData] = useState([]);
+    const [sorting, setSorting] = useState([{ id: 'createdDate', desc: true }]);
+    const [pagination, setPagination] = useState({
+        pageIndex: 0,
+        pageSize: 10,
+    });
     useEffect(() => {
-        setHistoryData([])
+        let sortString = "createdDate,desc"; // Giá trị mặc định nếu chưa có sort
 
-    }, [])
+        if (sorting.length > 0) {
+            const { id, desc } = sorting[0];
+            sortString = `${id},${desc ? 'desc' : 'asc'}`;
+        }
+        getHistory(pagination.pageIndex, pagination.pageSize, sortString).then(
+            res => {
+                setHistoryData(res.content);
+            }
+        ).catch(err => {
+            console.log(err);
+        })
+
+    }, [pagination.pageIndex, pagination.pageSize])
     const [globalFilter, setGlobalFilter] = useState("");
     const columns = useMemo(
         () => [
@@ -38,23 +56,30 @@ function HistoryTable() {
 
     const fakeData = useMemo(() => Array.from({ length: 48 }, (_, i) => ({
         no: i + 1,
-        originalUrl: `https://example.com/very-long-original-url-path-${i + 1}`,
+        originalUrl: `https://example.com/very-long-original-url-path-very-long-original-url-path-very-long-original-url-path-${i + 1}`,
         shortUrl: `https://short.ly/link${i + 1}`,
         createdAt: `2026-03-${30 - Math.floor(i / 5)} 10:00`,
         clickedCount: Math.floor(Math.random() * 500),
     })), []);
 
     const table = useReactTable({
-        data: fakeData,
+        data: historyData,
         columns,
+        pageCount: historyData.totalPages,
         state: {
             globalFilter,
+            sorting,
+            pagination
         },
-        initialState: {
-            pagination: {
-                pageSize: 5,
-            },
-        },
+        onPaginationChange: setPagination, // Khi bấm nút, nó sẽ update cái state này
+        manualPagination: true,            // QUAN TRỌNG: Bật chế độ Server-side
+        getCoreRowModel: getCoreRowModel(),
+        // initialState: {
+        //     pagination: {
+        //         pageSize: 10,
+        //     },
+        // },
+        onSortingChange: setSorting,
         onGlobalFilterChange: setGlobalFilter,
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
@@ -106,6 +131,13 @@ function HistoryTable() {
                                  
                                     <div className="history-table">
                                         <table>
+                                            <colgroup>
+                                                <col style={{ width: "5%" }} />
+                                                <col style={{ width: "40%" }} />
+                                                <col style={{ width: "25%" }} />
+                                                <col style={{ width: "15%" }} />
+                                                <col style={{ width: "15%" }} />
+                                            </colgroup>
                                             <thead>
                                                 {table.getHeaderGroups().map((headerGroup) => (
                                                     <tr key={headerGroup.id}>

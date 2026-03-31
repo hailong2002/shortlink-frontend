@@ -17,17 +17,26 @@
 .history-title {
     font-family: var(--mono);
     margin: 0px;
+    padding: 0px 100px;
 }
 
 .history-table {
     font-family: var(--mono);
     background-color: white;
+    padding: 0 100px;
+    border-radius: 12px;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: separate;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0.25, 0.25, 0.25, 0.25);
 }
 
 thead>tr {
-    border: 1px solid var(--border);
+    /* border: 1px solid var(--border); */
     text-align: left;
     padding: 10px 20px;
     background-color: gray;
@@ -36,6 +45,11 @@ thead>tr {
 
 thead>tr>th:first-child {
     border-radius: 12px 0 0 0;
+}
+
+thead>tr>th {
+    font-size: 18px;
+    /* padding: 5px 10px; */
 }
 
 thead>tr>th:last-child {
@@ -51,9 +65,26 @@ tbody>tr {
     }
 }
 
+tbody>tr:last-child>td:first-child{
+    border-radius: 0 0 0 12px;
+}
+
+tbody>tr:last-child>td:last-child{
+    border-radius: 0 0 12px 0;
+}
+
 td,
 th {
     padding: 10px 20px;
+
+}
+
+td {
+text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 400px;
+    font-size: 16px;
 }
 
 .pagination {
