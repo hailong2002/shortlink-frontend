@@ -24,13 +24,13 @@ function TopNav({ onLoginClick, user }) {
                 //     <a onClick={onLoginClick}>Login</a>
                 // </div>
                 // <div className="username">hailong123456@gmail.com</div>
+                user ? (
                 <div className="relative" >
-                    {/* Username */}
                     <div
                         className="cursor-pointer px-3 py-2 hover:bg-gray-100 rounded w-fit ml-auto"
                         onClick={() => setOpen(!open)}
                     >
-                        NguyenHaiLong ▼
+                        {user.name} ▼
                     </div>
 
                     {/* Dropdown */}
@@ -45,7 +45,11 @@ function TopNav({ onLoginClick, user }) {
                         </div>
                     )}
                 </div>
-            }
+                ) : (
+                    <div className="login-btn">
+                        <a onClick={onLoginClick}>Login</a>
+                    </div>
+                )}
         </div>
     );
 }

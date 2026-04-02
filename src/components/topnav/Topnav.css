@@ -4,9 +4,8 @@
 
 .logo {
     float: left;
-
     img {
-        padding: 5px;
+        margin-top: 3%;
         width: 200px;
         height: 50px;
     }

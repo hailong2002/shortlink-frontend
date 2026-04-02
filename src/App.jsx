@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import qrCode from './assets/qr.jpg'
 import { getOriginalUrl, createShortLink, me } from './services/shortlink';
 import TopNav from './components/topnav/Topnav';
 import Footer from './components/footer/Footer';
@@ -71,15 +72,18 @@ function App() {
           </div>
           {loading && <div className="spinner"></div>}
           {result && (
-            <p className='result'>Your short link: <a className='shortedUrl' href={result.data} target="_blank" rel="noopener noreferrer">{result.data}</a></p>
+            <p className='result'>🔥🔥🔥Your short link: <a className='shortedUrl' href={result.data} target="_blank" rel="noopener noreferrer">{result.data}</a>🔥🔥🔥</p>
           )}
+          {/* <div className='qr-code'>
+            <img src={qrCode} alt="QR Code" />
+          </div> */}
 
 
         </div>
 
-       
+        {/* <div className='history'><HistoryTable /></div> */}
         {user ? <div className='history'><HistoryTable /></div> : <div className='instruction'><Instruction /></div>  }
-      
+    
        
       </div>
 

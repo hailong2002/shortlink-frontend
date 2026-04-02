@@ -63,9 +63,9 @@ function HistoryTable() {
     const fakeData = useMemo(() => Array.from({ length: 48 }, (_, i) => ({
         no: i + 1,
         originalUrl: `https://example.com/very-long-original-url-path-very-long-original-url-path-very-long-original-url-path-${i + 1}`,
-        shortUrl: `https://short.ly/link${i + 1}`,
+        shortenedUrl: `https://short.ly/link${i + 1}`,
         createdAt: `2026-03-${30 - Math.floor(i / 5)} 10:00`,
-        clickedCount: Math.floor(Math.random() * 500),
+        clickCount: Math.floor(Math.random() * 500),
     })), []);
 
     const table = useReactTable({
