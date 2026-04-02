@@ -5,6 +5,7 @@ import TopNav from './components/topnav/Topnav';
 import Footer from './components/footer/Footer';
 import LoginModal from './components/login-modal/LoginModal';
 import HistoryTable from './components/history-table/HistoryTable';
+import Instruction from './components/instruction/instruction';
 
 function App() {
   const [url, setUrl] = useState(''); // Lưu link gốc người dùng gõ
@@ -14,6 +15,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    setResult({data: "https://google.com"});
     me()
       .then(res => {
         setUser(res.data);
@@ -69,14 +71,14 @@ function App() {
           </div>
           {loading && <div className="spinner"></div>}
           {result && (
-            <p className='result'>Short link: <a className='shortedUrl' href={result.data} target="_blank" rel="noopener noreferrer">{result.data}</a></p>
+            <p className='result'>Your short link: <a className='shortedUrl' href={result.data} target="_blank" rel="noopener noreferrer">{result.data}</a></p>
           )}
 
 
         </div>
 
        
-        {user && <div className='history'><HistoryTable /></div>  }
+        {user ? <div className='history'><HistoryTable /></div> : <div className='instruction'><Instruction /></div>  }
       
        
       </div>
