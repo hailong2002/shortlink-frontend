@@ -1,6 +1,7 @@
 import './Topnav.css';
 import { useState, useEffect } from 'react';
 import logo from '../../assets/main_logo.png';
+import { logout } from '../../services/shortlink';
 
 function TopNav({ onLoginClick, user }) {
 
@@ -10,6 +11,7 @@ function TopNav({ onLoginClick, user }) {
     const handleLogout = () => {
         console.log("logout...");
         setOpen(false);
+        logout();
         // clear token / call API logout ở đây
     };
 
