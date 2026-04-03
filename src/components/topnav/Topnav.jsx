@@ -1,5 +1,5 @@
 import './Topnav.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import logo from '../../assets/main_logo.png';
 import { logout } from '../../services/shortlink';
 
@@ -7,12 +7,29 @@ function TopNav({ onLoginClick, user }) {
 
     const [name, setName] = useState("");
     const [open, setOpen] = useState(false);
+    const menuRef = useRef(null);
 
-    const handleLogout = () => {
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setOpen(false);
+            }
+        };
+
+        if (open) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [open]);
+
+    const handleLogout = async () => {
         console.log("logout...");
         setOpen(false);
-        logout();
-        // clear token / call API logout ở đây
+        await logout();
+        window.location.reload();
     };
 
     return (
@@ -27,20 +44,20 @@ function TopNav({ onLoginClick, user }) {
                 // </div>
                 // <div className="username">hailong123456@gmail.com</div>
                 user ? (
-                <div className="relative" >
+                <div className="relative" ref={menuRef}>
                     <div
-                        className="cursor-pointer px-3 py-2 hover:bg-gray-100 rounded w-fit ml-auto"
+                        className="cursor-pointer px-3 py-4 hover:bg-gray-100 rounded w-fit ml-auto"
                         onClick={() => setOpen(!open)}
                     >
-                        {user.name} ▼
+                            {user.name} {open ? '⮝' : '⮟'}
                     </div>
 
-                    {/* Dropdown */}
                     {open && (
-                        <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow">
+                        <div className="absolute right-0 mt-1 mr-1 w-40 bg-white border rounded-xl shadow-lg overflow-hidden">
+                            <div className='p-2'>👋 Hi {user.name}, <br /></div>
                         <button
                             onClick={handleLogout}
-                            className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                            className="w-full text-left px-4 py-2 hover:bg-gray-300"
                         >
                             Logout
                         </button>
