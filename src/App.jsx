@@ -16,7 +16,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    setResult({data: "https://google.com"});
+    // setResult({data: "https://google.com"});
     me()
       .then(res => {
         setUser(res.data);
