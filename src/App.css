@@ -46,7 +46,7 @@ input[type="text"] {
   transition: border-color 0.25s, box-shadow 0.25s;
   height: 48px;
   font-family: var(--mono);
-  caret-color: black;
+  caret-color: white;
   color: white;
   &::placeholder {
     color: white;

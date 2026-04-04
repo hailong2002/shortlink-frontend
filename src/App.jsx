@@ -26,11 +26,31 @@ function App() {
       })
   }, [])
 
+  const isValidUrl = (urlString) => {
+    try {
+      return Boolean(new URL(urlString));
+    } catch (e) {
+      return false;
+    }
+  };
+
+
   const handleShorten = async () => {
+    if (!url || !url.trim()) {
+      alert("Please enter your url ! ");
+      return;
+    }
+
+    if (!isValidUrl(url)) {
+      alert("Your url is not valid ! ");
+      return;
+    }
+
     if (!user) {
       setIsOpen(true);
       return;
     }
+
     try {
       setLoading(true);
       const response = await createShortLink({ originalUrl: url });

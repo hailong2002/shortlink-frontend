@@ -11,7 +11,13 @@
     }
 }
 
-.login-btn {
+.right-topnav {
+    display: flex;
+    float: right;
+    font-family: var(--mono);
+}
+
+/* .login-btn {
     float: right;
     padding: 20px;
     font-family: var(--mono);
@@ -20,7 +26,7 @@
         color: var(--accent);
         cursor: pointer;
     }
-}
+} */
 
 .username {
     float: right;
