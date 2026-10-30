@@ -10,10 +10,11 @@ function LoginModal({ onClose }) {
     <>
             <div className="overlay" onClick={onClose}>
                 <div className="login-modal" onClick={(e) => e.stopPropagation()}>
-                <p className="login-text">Login now to get started</p>
+                    <button className="modal-close-btn" onClick={onClose} aria-label="Close modal">✕</button>
+                    <p className="login-text">Login now to get started</p>
                     <button className="login-button" onClick={handleLogin}>Login with Google</button>
-            </div>
-        </div>  
+                </div>
+            </div>  
     </>
     )
 }

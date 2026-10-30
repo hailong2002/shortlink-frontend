@@ -1,34 +1,32 @@
 .topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 24px;
     border-bottom: 1px solid var(--border);
+    background-color: var(--bg);
+    transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .logo {
-    float: left;
-    img {
-        margin: 3% 0 3% 0;
-        width: 200px;
-        height: 50px;
-    }
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 46px;
+    width: auto;
+    object-fit: contain;
 }
 
 .right-topnav {
     display: flex;
-    float: right;
+    align-items: center;
+    gap: 6px;
     font-family: var(--mono);
 }
-
-/* .login-btn {
-    float: right;
-    padding: 20px;
-    font-family: var(--mono);
-
-    &:hover {
-        color: var(--accent);
-        cursor: pointer;
-    }
-} */
 
 .username {
-    float: right;
-    padding: 15px;
+    padding: 8px 12px;
 }
+
